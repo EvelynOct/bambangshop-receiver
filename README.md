@@ -97,3 +97,18 @@ Rust enforces strict ownership and borrowing rules to guarantee memory safety an
 
 
 #### Reflection Subscriber-2
+# Reflection Subscriber-2
+
+## 1. Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not, explain why you did not do so. If yes, explain things that you have learned from those other parts of code.
+
+Yes, I explored several parts of the project outside the tutorial instructions, especially `src/lib.rs` and the configuration setup. From `src/lib.rs`, I learned how the application uses `lazy_static` to initialize shared objects such as `APP_CONFIG` and `REQWEST_CLIENT`. I also learned how environment variables are loaded using `dotenvy` and how `Figment` is used to generate application configuration values. In addition, I gained a better understanding of how custom error responses are implemented through the `compose_error_response` function and how the application structures common types such as `Result` and `ErrorResponse`. Exploring these files helped me understand how the different layers of the application work together beyond the tutorial tasks.
+
+## 2. Since you have completed the tutorial by now and have tried to test your notification system by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug in more subscribers. How about spawning more than one instance of Main app, will it still be easy to add to the system?
+
+The Observer pattern makes it easy to add more subscribers because the publisher only needs to maintain a list of subscribers and notify them when an event occurs. New Receiver instances can simply subscribe to a product type without requiring any changes to the publisher implementation. This promotes loose coupling because the publisher does not need to know the internal details of each subscriber.
+
+However, adding multiple instances of the Main application is more complicated. Each publisher instance maintains its own product data and subscriber list. Without a shared database or synchronization mechanism, subscribers registered to one publisher instance would not automatically be known by another publisher instance. Therefore, scaling subscribers is straightforward with the Observer pattern, but scaling publishers would require additional architecture such as shared storage, service discovery, or distributed messaging.
+
+## 3. Have you tried to make your own Tests, or enhance documentation on your Postman collection? If you have tried those features, tell us whether it is useful for your work (it can be your tutorial work or your Group Project).
+
+I reviewed the provided Postman collection and used it as a reference for understanding the API endpoints and request flows in the application. The collection is useful because it provides organized examples of requests for subscribing, unsubscribing, publishing notifications, and viewing received messages. It helps reduce manual effort when testing APIs and makes it easier to verify whether the application behaves as expected. For larger projects, I believe additional automated tests and more detailed API documentation would further improve maintainability and collaboration among team members.
