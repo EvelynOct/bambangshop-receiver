@@ -162,5 +162,8 @@ impl NotificationService {
 
         Ok(subscriber_result)
     }
+    pub fn list_messages() -> Result<Vec<String>> {
+        Ok(NotificationRepository::list_all_as_string())
+    }
 
 }
