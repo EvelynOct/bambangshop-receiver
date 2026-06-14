@@ -10,7 +10,8 @@ pub fn route_stage() -> AdHoc {
                 "/",
                 routes![
                     notification::subscribe,
-                    notification::unsubscribe
+                    notification::unsubscribe,
+                    notification::receive
                 ]
             )
         }
