@@ -7,7 +7,10 @@ pub fn route_stage() -> AdHoc {
         "Initializing controller routes...",
         |rocket| async {
             rocket
-                .mount("/", routes![])
+                .mount(
+                    "/",
+                    routes![notification::subscribe]
+                )
         }
     );
 }
